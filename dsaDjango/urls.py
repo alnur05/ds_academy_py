@@ -15,24 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render
 from django.urls import path
-
-from views_audi import audi, audi_purchase
+from market.views import show_cars, audi_purchase
 from views_weather import show_weather
 from views_name import name
 
 
 def hello_world(request: HttpRequest) -> HttpResponse:
-    return HttpResponse(
-        """
-        <h3>hello world </h3>
-        <div style="font-size = 18px">
-        <a href = "/weather">What is a whether today</a><br>
-        <a href="/audi">Audi center</a><br>
-        <a href="/name">What is your name?</a>
-        </div>
-        """
-    )
+    return render(request, "index.html")
 
 
 
@@ -40,7 +31,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', hello_world),
     path('weather/', show_weather),
-    path('audi/', audi),
+    path('audi/', show_cars),
     path('buy_car/<int:id_>', audi_purchase),
     path('name/', name),
 ]

@@ -1,5 +1,6 @@
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from market.models import Car, Order
 orders = []
 cars = [
     {
@@ -48,18 +49,3 @@ def audi(request: HttpRequest) -> HttpResponse:
 #     cars = [car for car in cars if car["id"] != id_]
 #     return HttpResponseRedirect("/audi")
 
-def audi_purchase(request: HttpRequest, id_: int) -> HttpResponse:
-    global cars
-    cars_with_id_match = [car for car in cars if car["id"] == id_]
-    car  =  cars[0]
-    if request.method == "POST":
-        orders.append({
-            "car" : car,
-            "name" : request.POST.get("name"),
-            "email": request.POST.get("email"),
-            "phone": request.POST.get("phone"),
-        })
-        print(orders)
-        car["available"] -= 1
-        return HttpResponseRedirect("/audi")
-    return render(request, "purchase_form.html", {"car": car})

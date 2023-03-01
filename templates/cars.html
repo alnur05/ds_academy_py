@@ -24,8 +24,8 @@
                 <img src="{{ car.image }}" class="card-img-top" alt="audi" style="width: auto">
                 <div class="card-body">
                     <h5 class="card-title">{{ car.name }}</h5>
-                    <p class="card-text">Available: {{ car.available }}</p>
-                    {% if car.available > 0 %}
+                    <p class="card-text">Available: {{ car.cars_left }}</p>
+                    {% if car.cars_left > 0 %}
                         <a href="/buy_car/{{ car.id }}" class="btn btn-primary">BUY</a>
                     {% else %}
                         <div class="btn btn-light">
